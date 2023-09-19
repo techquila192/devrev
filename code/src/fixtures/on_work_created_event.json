@@ -15,6 +15,7 @@
             "name": "test-enhancement",
             "type": "enhancement"
           },
+          "body":"The platform has inconsistent branding",
           "created_by": {
             "display_handle": "Sample Name",
             "display_id": "DEVU-5",

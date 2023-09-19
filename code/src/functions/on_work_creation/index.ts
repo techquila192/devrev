@@ -4,13 +4,13 @@ export const run = async (events: any[]) => {
     console.info(`Event ${event.payload.work_created.work.type} has been received.`);
     if(event.payload.work_created.work.type === 'ticket') {
       // Do something
-      const result = await addIssue()
+      const result = await addIssue(event.payload.work_created)
     }
   })
   console.info(`The work ${events[0].payload.work_created.work.id} has been created.`)
 };
 
-const addIssue = async () => {
+const addIssue = async (workcreated : any) => {
   
   // API call to get prev issues
   const config = {
@@ -19,18 +19,37 @@ const addIssue = async () => {
       'Content-Type': 'application/json'
     }
   }
-  const res = await axios.get('https://api.devrev.ai/works.list' , config)
+  const res = await axios.get('https://api.devrev.ai/works.list?type="issue"' , config)
   .then((response: AxiosResponse) => {
     return response.data
   })
   .catch((err) => {
     console.log(err)
   })
-  console.log(res.works)
+  //console.log(res.works)
 
   
   // Send prev issues + new issue to openai and get matching issue
+  const response = await axios.post(" https://ee57-202-142-106-83.ngrok-free.app/group-issue" , {
+    "ticket":workcreated,
+    "issues": res.works
+  }).then((response: AxiosResponse) => {
+    return response.data
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+  console.log(response)
+
   // create or add issue
+  if(response.length()>0){
+    //loop through issues and link ticket with all issues
+    
+  }else{
+    //create new issue
+  }
+
+
 
 }
 
