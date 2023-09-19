@@ -30,7 +30,7 @@ const addIssue = async (workcreated : any) => {
 
   
   // Send prev issues + new issue to openai and get matching issue
-  const response = await axios.post(" https://05c9-103-192-117-138.ngrok-free.app/group-issue" , {
+  const response = await axios.post("https://3d18-103-192-117-138.ngrok-free.app/group-issue" , {
     "ticket": workcreated,
     "issues": res.works
   }).then((response: AxiosResponse) => {
@@ -42,11 +42,11 @@ const addIssue = async (workcreated : any) => {
   console.log(response)
 
   const ticketId= workcreated.work.id;
-  const result=response.issues;
-  // create or add issue
-  if(result.length>0){
+  const issueIds=response.issueIds;
+  const issueNames=response.issueNames;
+    // create or add issue
     //loop through issues and link ticket with all issues
-    result.forEach(async (issue:any) => {
+    issueIds.forEach(async (issue:any) => {
     const linker = await axios.post('https://api.devrev.ai/links.create' ,{"source":ticketId,"link_type":"is_dependent_on", "target":issue} ,
     config)
     .then((response: AxiosResponse) => {
@@ -58,18 +58,16 @@ const addIssue = async (workcreated : any) => {
     }
     )
     
-    
-  }else{
     //create new issue and then link ticket to it 
     const appliesToPart= workcreated.work.applies_to_part;
     const ownedBy= workcreated.work.owned_by;
     const idArray: string[] = [];
-
     // Iterate through each object in ownedBy and extract the "id" field
     ownedBy.forEach((item:any) => {
     idArray.push(item.id);
     });
-    const title= "New Issue"  //fix this by getting issue from ticket 
+    issueNames.forEach(async (issueName:any) => {
+    const title= issueName  //fix this by getting issue from ticket 
     const body = {
       "applies_to_part": appliesToPart.id,
       "title": title,
@@ -92,8 +90,8 @@ const addIssue = async (workcreated : any) => {
   .catch((err) => {
     console.log(err)
   })
-  console.log(newLinker)
-  }
+  })
+  //console.log(newLinker)
 
 
 }
