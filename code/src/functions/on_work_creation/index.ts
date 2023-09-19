@@ -30,8 +30,8 @@ const addIssue = async (workcreated : any) => {
 
   
   // Send prev issues + new issue to openai and get matching issue
-  const response = await axios.post(" https://ee57-202-142-106-83.ngrok-free.app/group-issue" , {
-    "ticket":workcreated,
+  const response = await axios.post(" https://05c9-103-192-117-138.ngrok-free.app/group-issue" , {
+    "ticket": workcreated,
     "issues": res.works
   }).then((response: AxiosResponse) => {
     return response.data
@@ -41,14 +41,59 @@ const addIssue = async (workcreated : any) => {
   })
   console.log(response)
 
+  const ticketId= workcreated.work.id;
+  const result=response.issues;
   // create or add issue
-  if(response.length()>0){
+  if(result.length>0){
     //loop through issues and link ticket with all issues
+    result.forEach(async (issue:any) => {
+    const linker = await axios.post('https://api.devrev.ai/links.create' ,{"source":ticketId,"link_type":"is_dependent_on", "target":issue} ,
+    config)
+    .then((response: AxiosResponse) => {
+      return response.data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    }
+    )
+    
     
   }else{
-    //create new issue
-  }
+    //create new issue and then link ticket to it 
+    const appliesToPart= workcreated.work.applies_to_part;
+    const ownedBy= workcreated.work.owned_by;
+    const idArray: string[] = [];
 
+    // Iterate through each object in ownedBy and extract the "id" field
+    ownedBy.forEach((item:any) => {
+    idArray.push(item.id);
+    });
+    const title= "New Issue"  //fix this by getting issue from ticket 
+    const body = {
+      "applies_to_part": appliesToPart.id,
+      "title": title,
+      "owned_by": idArray,
+      "type": "issue"
+    }
+    const newIssue = await axios.post('https://api.devrev.ai/works.create' , body,config)
+  .then((response: AxiosResponse) => {
+    return response.data
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+  const newLinker = await axios.post('https://api.devrev.ai/links.create' ,{"source":ticketId,"link_type":"is_dependent_on", "target":newIssue.work.id} ,
+  config)
+  .then((response: AxiosResponse) => {
+    return response.data
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+  console.log(newLinker)
+  }
 
 
 }

@@ -6,56 +6,7 @@
       "type": "work_created",
       "unique_key": "ZG9uOmludGVncmF0aW9uOmR2cnYtdXMtMTpkZXZvLzFGR2lCenJhNjpldmVudF9zb3VyY2UvYzMzMDI2Y2UtOTM5Yy00ZWEzLThjYzctOTI4M2M0NWI3ZjRk",
       "webhook_id": "don:integration:dvrv-us-1:devo/XXXXXX:webhook/mpLkC87l",
-      "work_created": {
-        "work": {
-          "applies_to_part": {
-            "display_id": "ENH-9",
-            "id": "don:core:dvrv-us-1:devo/XXXXXX:enhancement/9",
-            "id_v1": "don:DEV-XXXXXX:enhancement: 9",
-            "name": "test-enhancement",
-            "type": "enhancement"
-          },
-          "body":"The platform has inconsistent branding",
-          "created_by": {
-            "display_handle": "Sample Name",
-            "display_id": "DEVU-5",
-            "display_name": "Sample Name",
-            "email": "i-Demo1.Demo2@domain.com",
-            "full_name": "Sample Name",
-            "id": "don:identity:dvrv-us-1:devo/XXXXXX:devu/5",
-            "id_v1": "don:DEV-XXXXXX:dev_user:DEVU-5",
-            "state": "active",
-            "type": "dev_user"
-          },
-          "created_date": "2023-04-03T14: 14: 30.336Z",
-          "custom_fields": null,
-          "display_id": "TKT-122",
-          "id": "don:core:dvrv-us-1:devo/XXXXXX:ticket/122",
-          "id_v1": "don:DEV-XXXXXX:ticket: 122",
-          "owned_by": [
-            {
-              "display_handle": "Sample Name",
-              "display_id": "DEVU-5",
-              "display_name": "Sample Name",
-              "email": "i-Demo1.Demo2@domain.com",
-              "full_name": "Sample Name",
-              "id": "don:identity:dvrv-us-1:devo/XXXXXX:devu/5",
-              "id_v1": "don:DEV-XXXXXX:dev_user:DEVU-5",
-              "state": "active",
-              "type": "dev_user"
-            }
-          ],
-          "severity": "medium",
-          "stage": {
-            "name": "queued",
-            "ordinal": 700
-          },
-          "state": "open",
-          "stock_schema_fragment": "don:core:dvrv-us-1:stock_sf/297430",
-          "title": "test-ticket",
-          "type": "ticket"
-        }
-      }
+      "work_created": {"work" : {"type":"ticket","age_days":0.00008179398148148148,"applies_to_part":{"type":"capability","display_id":"CAPL-3","id":"don:core:dvrv-us-1:devo/yHyDpwz4:capability/3","id_v1":"don:DEV-yHyDpwz4:capability:3","name":"Default Capability 3"},"body":"The customer noticed the presence of numerous broken images across the website. These technical issues severely impacted the website's visual appeal and professionalism, contributing to a subpar user experience","created_by":{"type":"dev_user","display_handle":"arnab","display_id":"DEVU-2","display_name":"arnab","email":"0312arnabpalchaudhuri@gmail.com","full_name":"Arnab Pal Chaudhuri","id":"don:identity:dvrv-us-1:devo/yHyDpwz4:devu/2","id_v1":"don:DEV-yHyDpwz4:dev_user:DEVU-2","state":"active","thumbnail":"https://api.devrev.ai/internal/display-picture/Arnab%20Pal%20Chaudhuri.svg"},"created_date":"2023-09-18T19:46:09.499Z","custom_fields":null,"display_id":"TKT-27","id":"don:core:dvrv-us-1:devo/yHyDpwz4:ticket/27","id_v1":"don:DEV-yHyDpwz4:ticket:27","modified_by":{"type":"dev_user","display_handle":"arnab","display_id":"DEVU-2","display_name":"arnab","email":"0312arnabpalchaudhuri@gmail.com","full_name":"Arnab Pal Chaudhuri","id":"don:identity:dvrv-us-1:devo/yHyDpwz4:devu/2","id_v1":"don:DEV-yHyDpwz4:dev_user:DEVU-2","state":"active","thumbnail":"https://api.devrev.ai/internal/display-picture/Arnab%20Pal%20Chaudhuri.svg"},"modified_date":"2023-09-18T19:46:09.499Z","owned_by":[{"type":"dev_user","display_handle":"arnab","display_id":"DEVU-2","display_name":"arnab","email":"0312arnabpalchaudhuri@gmail.com","full_name":"Arnab Pal Chaudhuri","id":"don:identity:dvrv-us-1:devo/yHyDpwz4:devu/2","id_v1":"don:DEV-yHyDpwz4:dev_user:DEVU-2","state":"active","thumbnail":"https://api.devrev.ai/internal/display-picture/Arnab%20Pal%20Chaudhuri.svg"}],"severity":"medium","source_channel":"app","stage":{"name":"queued","notes":"","ordinal":700,"stage":{"id":"don:core:dvrv-us-1:devo/yHyDpwz4:custom_stage/4"},"state":{"id":"don:core:dvrv-us-1:devo/yHyDpwz4:custom_state/1"}},"state":"open","stock_schema_fragment":"don:core:dvrv-us-1:stock_sf/5618","title":"New ticket 2"}}
     },
     "context": {
       "dev_oid": "don:identity:dvrv-us-1:devo/XXXXXX",
