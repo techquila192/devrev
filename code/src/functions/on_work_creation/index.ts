@@ -30,7 +30,7 @@ const addIssue = async (workcreated : any) => {
 
   
   // Send prev issues + new issue to openai and get matching issue
-  const response = await axios.post("https://9b9e-103-192-117-138.ngrok-free.app/group-issue" , {
+  const response = await axios.post(" https://ee57-202-142-106-83.ngrok-free.app/group-issue" , {
     "ticket": workcreated,
     "issues": res.works
   }).then((response: AxiosResponse) => {
