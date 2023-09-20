@@ -30,7 +30,7 @@ const addIssue = async (workcreated : any) => {
 
   
   // Send prev issues + new issue to openai and get matching issue
-  const response = await axios.post("https://3d18-103-192-117-138.ngrok-free.app/group-issue" , {
+  const response = await axios.post("https://9b9e-103-192-117-138.ngrok-free.app/group-issue" , {
     "ticket": workcreated,
     "issues": res.works
   }).then((response: AxiosResponse) => {
@@ -44,10 +44,11 @@ const addIssue = async (workcreated : any) => {
   const ticketId= workcreated.work.id;
   const issueIds=response.issueIds;
   const issueNames=response.issueNames;
+  const issueBody=response.issueBody;
     // create or add issue
     //loop through issues and link ticket with all issues
     issueIds.forEach(async (issue:any) => {
-    const linker = await axios.post('https://api.devrev.ai/links.create' ,{"source":ticketId,"link_type":"is_dependent_on", "target":issue} ,
+    const linker = await axios.post('https://api.devrev.ai/links.create',{"source":ticketId,"link_type":"is_dependent_on", "target":issue} ,
     config)
     .then((response: AxiosResponse) => {
       return response.data
@@ -66,14 +67,17 @@ const addIssue = async (workcreated : any) => {
     ownedBy.forEach((item:any) => {
     idArray.push(item.id);
     });
+    let j=0;
     issueNames.forEach(async (issueName:any) => {
-    const title= issueName  //fix this by getting issue from ticket 
+    const title= issueName  
     const body = {
       "applies_to_part": appliesToPart.id,
       "title": title,
+      "body": issueBody[j],
       "owned_by": idArray,
       "type": "issue"
     }
+    j++;
     const newIssue = await axios.post('https://api.devrev.ai/works.create' , body,config)
   .then((response: AxiosResponse) => {
     return response.data
