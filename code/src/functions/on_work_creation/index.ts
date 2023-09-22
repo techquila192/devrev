@@ -1,12 +1,17 @@
 import axios , {AxiosResponse} from 'axios';
+const instance = axios.create({
+  timeout: 70000, // Set a 10-second timeout for all requests made using this instance
+});
+
 export const run = async (events: any[]) => {
-  events.forEach(async (event) => {
+  for(const event of events) {
+    console.info(event);
     console.info(`Event ${event.payload.work_created.work.type} has been received.`);
     if(event.payload.work_created.work.type === 'ticket') {
       // Do something
       const result = await addIssue(event.payload.work_created)
     }
-  })
+  }
   console.info(`The work ${events[0].payload.work_created.work.id} has been created.`)
 };
 
@@ -28,9 +33,9 @@ const addIssue = async (workcreated : any) => {
   })
   //console.log(res.works)
 
-  
+
   // Send prev issues + new issue to openai and get matching issue
-  const response = await axios.post(" https://ee57-202-142-106-83.ngrok-free.app/group-issue" , {
+  const response = await axios.post("https://hackerhive.onrender.com/group-issue" , {
     "ticket": workcreated,
     "issues": res.works
   }).then((response: AxiosResponse) => {
@@ -47,18 +52,18 @@ const addIssue = async (workcreated : any) => {
   const issueBody=response.issueBody;
     // create or add issue
     //loop through issues and link ticket with all issues
-    issueIds.forEach(async (issue:any) => {
+    for(const issue of issueIds) {
     const linker = await axios.post('https://api.devrev.ai/links.create',{"source":ticketId,"link_type":"is_dependent_on", "target":issue} ,
     config)
     .then((response: AxiosResponse) => {
+      console.log(response.data);
       return response.data
     })
     .catch((err) => {
       console.log(err)
     })
     }
-    )
-    
+
     //create new issue and then link ticket to it 
     const appliesToPart= workcreated.work.applies_to_part;
     const ownedBy= workcreated.work.owned_by;
@@ -68,7 +73,7 @@ const addIssue = async (workcreated : any) => {
     idArray.push(item.id);
     });
     let j=0;
-    issueNames.forEach(async (issueName:any) => {
+    for (const issueName of issueNames) {
     const title= issueName  
     const body = {
       "applies_to_part": appliesToPart.id,
@@ -94,7 +99,7 @@ const addIssue = async (workcreated : any) => {
   .catch((err) => {
     console.log(err)
   })
-  })
+  }
   //console.log(newLinker)
 
 
