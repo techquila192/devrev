@@ -3,7 +3,7 @@
 
 version: "1"
 name: "DevFlow Enhancer"
-description: "Provides telephony support and "
+description: "Provides telephony support and removes redundancy in issue tracking"
 
 # This is the name displayed in DevRev where the Snap-In takes actions using the token of this service account.
 service_account:
