@@ -2,8 +2,8 @@
 # Refactor the code based on your business logic.
 
 version: "1"
-name: "Work Tracker"
-description: "Logs a message when a work item is created"
+name: "DevFlow Enhancer"
+description: "Provides telephony support and "
 
 # This is the name displayed in DevRev where the Snap-In takes actions using the token of this service account.
 service_account:
@@ -35,6 +35,8 @@ event-sources:
 functions:
   - name: on_work_creation
     description: function to trigger on work creation
+  - name: on_command
+    description: function to trigger on command
 
 # Automations reference: https://github.com/devrev/snap-in-docs/blob/main/references/event_sources.md.
 automations:
@@ -43,3 +45,14 @@ automations:
     event_types:
       - work_created
     function: on_work_creation
+
+commands:
+  - name: call
+    namespace: devrev
+    description: Command to call a customer.
+    surfaces:
+      - surface: discussions
+        object_types:
+          - ticket
+    usage_hint: "Command to call a customer via ticket"
+    function: on_command
