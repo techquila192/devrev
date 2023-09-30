@@ -32,7 +32,7 @@ export const run = async (events: any[]) => {
     const entry = await collection.findOne({ticket_id:ticketId});
     const custNum=entry!.number;
 
-    axios.post(" https://b742-103-44-174-33.ngrok-free.app/set-number", {"custNum":custNum,"ticketId":ticketId})
+    axios.post("https://hackerhive.onrender.com/set-number", {"custNum":custNum,"ticketId":ticketId})
   .then((response) => {
     console.log('Response:', response.data);
   })
@@ -42,7 +42,7 @@ export const run = async (events: any[]) => {
 
   twiclient.calls
       .create({
-         url:"https://b742-103-44-174-33.ngrok-free.app/answer",
+         url:"https://hackerhive.onrender.com/answer",
          to:    custNum,
          from: '+12564856295'  //set this as support number in env
        })
