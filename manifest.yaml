@@ -46,6 +46,15 @@ automations:
       - work_created
     function: on_work_creation
 
+developer_connections:
+  - name: twilio
+    description: Store twilio auth token
+    display_name: Twilio PAT
+
+  - name: mongo
+    description: Store db uri
+    display_name: Mongo URI    
+
 commands:
   - name: call
     namespace: devrev

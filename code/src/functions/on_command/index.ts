@@ -2,20 +2,25 @@
 import axios from 'axios';
 import { MongoClient, Db, } from 'mongodb';
 
-const uri = 'mongodb+srv://nilupilu:hellomello@cluster0.tjvd3bk.mongodb.net/'; // Replace with your MongoDB URI
+// Replace with your MongoDB URI
 const databaseName = 'Customer'; // Replace with your database name
 const collectionName = 'CallData'; 
-const client = new MongoClient(uri);
+var client:any;
 
-const twiclient = require('twilio')("AC2deea27febf4d49d44979e23c46aad2c","fe472d53fb4ae0b7b0d7b29612a986dc");
+
+var twiclient:any;
 
 
 export const run = async (events: any[]) => {
     console.info('events', JSON.stringify(events), '\n\n\n');
-    await client.connect();
-    console.log('Connected to MongoDB');
+    
     
     for (let event of events) {
+      const uri = event.input_data.keyrings.mongo; 
+      client = new MongoClient(uri);
+      await client.connect();
+      console.log('Connected to MongoDB');
+      twiclient = require('twilio')("AC2deea27febf4d49d44979e23c46aad2c",event.input_data.keyrings.twilio);
       const resp = await handleEvent(event);
       //console.log(JSON.stringify(resp!.data));
     }
