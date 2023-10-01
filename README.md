@@ -9,4 +9,4 @@ The snap-in operates in the following sequence of events:-
 
 This application utilizes the custom snap-in API which can be accessed here:-
 
-## [Snap-in API](https://github.com/nbhattacharya08/snap-in-api)
+## [Snap-in API](https://github.com/techquila192/snap-in-api)
